@@ -1,0 +1,4 @@
+{
+    "semi": false, //取消末尾分号
+    "singleQuole": true //单引号表示字符串
+}
