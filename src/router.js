@@ -4,24 +4,26 @@ import Login from './components/Login.vue'
 import Home from './components/Home.vue'
 import Welcome from './components/Welcome.vue'
 import Users from './components/user/Users.vue'
+import Rights from './components/power/Rights.vue'
+import Roles from './components/power/Roles'
 
 Vue.use(VueRouter)
 
-const routes = [{
-    path: '/',
-    component: Login
-}, {
-    path: '/login',
-    component: Login
-}, {
-    path: '/home',
-    component: Home,
-    redirect: '/welcome', //路由重定向
-    children: [ //在home中展示welcome组件
-        { path: '/welcome', component: Welcome },
-        { path: '/users', component: Users }
-    ]
-}]
+const routes = [
+    { path: '/', component: Login },
+    { path: '/login', component: Login },
+    {
+        path: '/home',
+        component: Home,
+        redirect: '/welcome', //路由重定向
+        children: [ //在home中展示welcome组件
+            { path: '/welcome', component: Welcome },
+            { path: '/users', component: Users },
+            { path: '/rights', component: Rights },
+            { path: '/roles', component: Roles }
+        ]
+    }
+]
 
 const router = new VueRouter({
         routes
