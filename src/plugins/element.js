@@ -1,5 +1,9 @@
 import Vue from 'vue'
-import { Upload, CheckboxGroup, Checkbox, Steps, Step, Tabs, TabPane, Alert, Cascader, Option, Select, Tree, Tag, MessageBox, Dialog, Pagination, Tooltip, Switch, Table, TableColumn, Row, Col, Card, BreadcrumbItem, Breadcrumb, Form, FormItem, Input, Message, Button, Container, Header, Aside, Main, Menu, Submenu, MenuItemGroup, MenuItem } from 'element-ui'
+import { Timeline, TimelineItem, Upload, CheckboxGroup, Checkbox, Steps, Step, Tabs, TabPane, Alert, Cascader, Option, Select, Tree, Tag, MessageBox, Dialog, Pagination, Tooltip, Switch, Table, TableColumn, Row, Col, Card, BreadcrumbItem, Breadcrumb, Form, FormItem, Input, Message, Button, Container, Header, Aside, Main, Menu, Submenu, MenuItemGroup, MenuItem } from 'element-ui'
+
+// 低版本element.js  timeline注册详见p331
+// import Timeline from './timeline/index'
+// import TimelineItem from './timeline-item/index'
 
 //Vue.use()注册为全局组件
 Vue.use(Button)
@@ -38,5 +42,7 @@ Vue.use(Steps)
 Vue.use(CheckboxGroup)
 Vue.use(Checkbox)
 Vue.use(Upload)
+Vue.use(Timeline)
+Vue.use(TimelineItem)
 Vue.prototype.$message = Message //弹框组件通过this可以访问
 Vue.prototype.$confirm = MessageBox.confirm
