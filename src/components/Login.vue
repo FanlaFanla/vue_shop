@@ -27,48 +27,48 @@
 
 <script>
 export default {
-    data(){
-        return {
-            //这是登录表单的数据绑定对象
-            loginForm: {
-                username: 'admin',
-                password: '123456'
-            },
-            //这是表单验证规则对象
-            loginFormRules: {
-            //验证用户名是否合法
-            username:[
-                { required: true, message: '请输入用户名称', trigger: 'blur' },
-                { min: 3, max: 8, message: '长度在 3 到 8 个字符', trigger: 'blur' }
-            ],
-            //验证密码是否合法
-            password:[
-                { required: true, message: '请输入密码', },
-                { min: 6, max: 16, message: '长度在 6 到 16 个字符', trigger: 'blur' }
-            ]
-        }
-        }
-    },
-    methods:{
-        //点击重置按钮
-        resetLoginForm() {
-            //console.log(this)
-            this.$refs.loginFormRef.resetFields();
-        },
-        //登录预验证
-        login() {
-            this.$refs.loginFormRef.validate(async valid=>{
-                if(!valid) return; //如果不为真则直接return
-                const { data:res } = await this.$http.post('login',this.loginForm);
-                if(res.meta.status !== 200) return this.$message.error('登录失败！');
-                this.$message.success('登录成功！！');
-                //token保存到sessionStorage中
-                window.sessionStorage.setItem('token',res.data.token);
-                //通过编程式导航跳转到后台 /home
-                this.$router.push('/home');
-            })
-        }
+  data () {
+    return {
+      // 这是登录表单的数据绑定对象
+      loginForm: {
+        username: 'admin',
+        password: '123456'
+      },
+      // 这是表单验证规则对象
+      loginFormRules: {
+        // 验证用户名是否合法
+        username: [
+          { required: true, message: '请输入用户名称', trigger: 'blur' },
+          { min: 3, max: 8, message: '长度在 3 到 8 个字符', trigger: 'blur' }
+        ],
+        // 验证密码是否合法
+        password: [
+          { required: true, message: '请输入密码' },
+          { min: 6, max: 16, message: '长度在 6 到 16 个字符', trigger: 'blur' }
+        ]
+      }
     }
+  },
+  methods: {
+    // 点击重置按钮
+    resetLoginForm () {
+      // console.log(this)
+      this.$refs.loginFormRef.resetFields()
+    },
+    // 登录预验证
+    login () {
+      this.$refs.loginFormRef.validate(async valid => {
+        if (!valid) return // 如果不为真则直接return
+        const { data: res } = await this.$http.post('login', this.loginForm)
+        if (res.meta.status !== 200) return this.$message.error('登录失败！')
+        this.$message.success('登录成功！！')
+        // token保存到sessionStorage中
+        window.sessionStorage.setItem('token', res.data.token)
+        // 通过编程式导航跳转到后台 /home
+        this.$router.push('/home')
+      })
+    }
+  }
 }
 </script>
 

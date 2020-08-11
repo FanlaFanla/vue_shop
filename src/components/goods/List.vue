@@ -51,74 +51,74 @@
                 :total="goodsTotal" background>
                 </el-pagination>
         </el-card>
-    </div>    
+    </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            //查询参数对象
-            queryInfo: {
-                query: '',
-                pagenum: 1,
-                pagesize: 10
-            },
-            //商品列表
-            goodsList: [],
-            //总数据条数
-            goodsTotal: 0
-        }
-    },
-    created() {
-        this.getGoodsList()
-    },
-    methods: {
-        //根据分页获取对应的商品列表
-        async getGoodsList() {
-            const {data: res} = await this.$http.get('goods', { params: this.queryInfo })
-            if(res.meta.status !== 200) {
-                return this.$message.error('获取商品列表失败')
-            }
-             this.$message.success('获取商品列表成功')
-             this.goodsList = res.data.goods
-             this.goodsTotal = res.data.total
-             console.log(res.data)
-        },
-        //当前显示条数改变时触发
-        handleSizeChange(newSize) {
-            this.queryInfo.pagesize = newSize
-            this.getGoodsList()
-        },
-        //当前页码数改变时触发
-        handleCurrentChange(newPage) {
-            this.queryInfo.pagenum = newPage
-            this.getGoodsList()
-        },
-        //删除商品函数
-        async removeById(id) {
-            const confirmResult = await this.$confirm('此操作将永久删除该商品, 是否继续?', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning'
-            }).catch(err => err)
-
-            if(confirmResult !== 'confirm') {
-                return this.$message.info('取消删除商品！')
-            }
-
-            const {data: res} = await this.$http.delete(`goods/${id}`)
-            if(res.meta.status !== 200) {
-                return this.$message.error('删除失败！')
-            }
-            this.$message.success('删除成功！')
-            this.getGoodsList()
-        },
-        //添加商品组件
-        goAddpage() {
-            this.$router.push('/goods/add')
-        }
+  data () {
+    return {
+      // 查询参数对象
+      queryInfo: {
+        query: '',
+        pagenum: 1,
+        pagesize: 10
+      },
+      // 商品列表
+      goodsList: [],
+      // 总数据条数
+      goodsTotal: 0
     }
+  },
+  created () {
+    this.getGoodsList()
+  },
+  methods: {
+    // 根据分页获取对应的商品列表
+    async getGoodsList () {
+      const { data: res } = await this.$http.get('goods', { params: this.queryInfo })
+      if (res.meta.status !== 200) {
+        return this.$message.error('获取商品列表失败')
+      }
+      this.$message.success('获取商品列表成功')
+      this.goodsList = res.data.goods
+      this.goodsTotal = res.data.total
+      console.log(res.data)
+    },
+    // 当前显示条数改变时触发
+    handleSizeChange (newSize) {
+      this.queryInfo.pagesize = newSize
+      this.getGoodsList()
+    },
+    // 当前页码数改变时触发
+    handleCurrentChange (newPage) {
+      this.queryInfo.pagenum = newPage
+      this.getGoodsList()
+    },
+    // 删除商品函数
+    async removeById (id) {
+      const confirmResult = await this.$confirm('此操作将永久删除该商品, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).catch(err => err)
+
+      if (confirmResult !== 'confirm') {
+        return this.$message.info('取消删除商品！')
+      }
+
+      const { data: res } = await this.$http.delete(`goods/${id}`)
+      if (res.meta.status !== 200) {
+        return this.$message.error('删除失败！')
+      }
+      this.$message.success('删除成功！')
+      this.getGoodsList()
+    },
+    // 添加商品组件
+    goAddpage () {
+      this.$router.push('/goods/add')
+    }
+  }
 }
 </script>
 

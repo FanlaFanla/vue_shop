@@ -38,7 +38,7 @@
                     </el-submenu>
             </el-menu>
         </el-aside>
-        <!-- 右侧主体区 -->
+    <!-- 右侧主体区 -->
     <el-main>
         <!-- 路由占位符 -->
         <router-view></router-view>
@@ -49,56 +49,56 @@
 
 <script>
 export default {
-    data(){
-        return {
-            //左侧菜单数据
-            menulist: [],
-            //控制菜单栏图标
-            iconsObj:{
-                '125':'el-icon-user',
-                '103':'el-icon-box',
-                '101':'el-icon-goods',
-                '102':'el-icon-notebook-2',
-                '145':'el-icon-data-analysis'
-            },
-            //折叠菜单栏控制 默认false不折叠
-            isCollapse: false,
-            //被激活的链接地址
-            activePath: ''
-        }
-    },
-    //created（）页面加载后就执行里面的代码
-    created(){ 
-        this.getMenuList()
-        this.activePath = window.sessionStorage.getItem('activePath')
-    },
-    methods: {
-        loginOut() {
-            //清空token
-            window.sessionStorage.clear()
-            //重定向login登录页
-            this.$router.push('/login')
-        },
-        // 获取所有的菜单
-        async getMenuList(){
-            const {data: res} = await this.$http.get('menus')
-            if(res.meta.status !== 200) return this.$message.error(res.meta.msg)
-            this.menulist = res.data
-            console.log(res)
-        },
-        //点击按钮，菜单栏折叠与展开
-        toggleCollaps(){
-            //!取反
-            this.isCollapse = ! this.isCollapse;
-        },
-        //保存链接的激活状态，使当前选中的选项高亮显示
-        savaNavState(activePath) {
-            //设置sessionStorage
-            window.sessionStorage.setItem('activePath',activePath)
-            //重新赋值activePath
-            this.activePath = activePath
-        }
+  data () {
+    return {
+      // 左侧菜单数据
+      menulist: [],
+      // 控制菜单栏图标
+      iconsObj: {
+        125: 'el-icon-user',
+        103: 'el-icon-box',
+        101: 'el-icon-goods',
+        102: 'el-icon-notebook-2',
+        145: 'el-icon-data-analysis'
+      },
+      // 折叠菜单栏控制 默认false不折叠
+      isCollapse: false,
+      // 被激活的链接地址
+      activePath: ''
     }
+  },
+  // created（）页面加载后就执行里面的代码
+  created () {
+    this.getMenuList()
+    this.activePath = window.sessionStorage.getItem('activePath')
+  },
+  methods: {
+    loginOut () {
+      // 清空token
+      window.sessionStorage.clear()
+      // 重定向login登录页
+      this.$router.push('/login')
+    },
+    // 获取所有的菜单
+    async getMenuList () {
+      const { data: res } = await this.$http.get('menus')
+      if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
+      this.menulist = res.data
+      console.log(res)
+    },
+    // 点击按钮，菜单栏折叠与展开
+    toggleCollaps () {
+      //! 取反
+      this.isCollapse = !this.isCollapse
+    },
+    // 保存链接的激活状态，使当前选中的选项高亮显示
+    savaNavState (activePath) {
+      // 设置sessionStorage
+      window.sessionStorage.setItem('activePath', activePath)
+      // 重新赋值activePath
+      this.activePath = activePath
+    }
+  }
 }
 </script>
 

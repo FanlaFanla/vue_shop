@@ -22,49 +22,49 @@ import echarts from 'echarts'
 import _ from 'lodash'
 
 export default {
-    data() {
-        return {
-            // options数据是echarts需要合并的数据
-            options: {
-                title: {
-                    text: '用户来源'
-                },
-                tooltip: {},
-                legend: {
-                    data:['销量']
-                },
-                xAxis: {
-                    data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-                },
-                yAxis: {},
-                series: [{
-                    type: 'bar',
-                    data: [5, 20, 36, 10, 10, 20]
-                }]
-            }
-        }
-    },
-    created() {},
-    //mounted 此时，页面上的元素，已经被渲染完毕了
-    async mounted() {
-        // 3.基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'))
+  data () {
+    return {
+      // options数据是echarts需要合并的数据
+      options: {
+        title: {
+          text: '用户来源'
+        },
+        tooltip: {},
+        legend: {
+          data: ['销量']
+        },
+        xAxis: {
+          data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+        },
+        yAxis: {},
+        series: [{
+          type: 'bar',
+          data: [5, 20, 36, 10, 10, 20]
+        }]
+      }
+    }
+  },
+  created () {},
+  // mounted 此时，页面上的元素，已经被渲染完毕了
+  async mounted () {
+    // 3.基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'))
 
-        const {data: res} = await this.$http.get('reports/type/1')
-        if(res.meta.status !== 200) {
-            return this.$message.error('获取折线图数据失败！')
-        }
+    const { data: res } = await this.$http.get('reports/type/1')
+    if (res.meta.status !== 200) {
+      return this.$message.error('获取折线图数据失败！')
+    }
 
-        // 4.准备数据和配置项
-        // 使用lodash的merge方法进行数据合并，返回新数据对象
-        const result = _.merge(res.data, this.options)
+    // 4.准备数据和配置项
+    // 使用lodash的merge方法进行数据合并，返回新数据对象
+    const result = _.merge(res.data, this.options)
 
-        // 5.展示数据
-        myChart.setOption(result)
+    // 5.展示数据
+    myChart.setOption(result)
 
-        console.log(res.data)
-    },
-    methods: {}
+    console.log(res.data)
+  },
+  methods: {}
 }
 </script>
 

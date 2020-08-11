@@ -78,84 +78,84 @@
 import cityData from './citydata.js'
 
 export default {
-    data() {
-        return {
-            // 查询对象
-            queryInfo: {
-                query: '',
-                pagenum: 1,
-                pagesize: 10
-            },
-            total: 0,
-            orderList: [],
-            // 地址修改对话框显示隐藏
-            addressVisible: false,
-            // 物流进度对话框显示隐藏
-            progressVisible: false,
-            // 地址表单
-            addressForm: {
-                address1: [],
-                address2: ''
-            },
-            addressFormRule: {
-                address1: [
-                    {required: true, message: '请选择省市区县', trigger: 'blur'}
-                ],
-                address2: [
-                    {required: true, message: '请输入详细地址', trigger: 'blur'}
-                ]
-            },
-            // 使用城市模块
-            cityData: cityData,
-            // 物流信息存储
-            progressInfo: []
-        }
-    },
-    created() {
-        this.getOrderList()
-    },
-    methods: {
-        async getOrderList() {
-            const {data: res} = await this.$http.get('orders', {params: this.queryInfo})
-            if(res.meta.status !== 200) {
-                return this.$message.error('获取列表失败！')
-            }
-            this.total = res.data.total
-            this.orderList = res.data.goods
-            console.log(res.data)
-        },
-        // 分页显示条数改变时触发函数
-        handleSizeChange(newSize) {
-            this.queryInfo.pagesize = newSize
-            this.getOrderList()
-        },
-        // 页码值发生改变是时触发
-        handleCurrentChange(newPage) {
-            this.queryInfo.pagenum = newPage
-            this.getOrderList()
-        },
-        //展示修改地址的对话框
-        showBox() {
-            this.addressVisible = true
-        },
-        //清空表单项
-        addressDialogClosed() {
-            // 关闭时清空Form
-            this.$refs.addressFormRef.resetFields()
-        },
-        //展示物流对话框
-        async showProgressBox() {
-            // 请求地址是 kuaidi/:id
-            //804909574412544580快单号是测试使用的
-            const {data: res} = await this.$http.get('kuaidi/804909574412544580')
-            if(res.meta.status !== 200) {
-                return this.$message.error('物流信息获取失败！')
-            }
-            this.progressInfo = res.data
-            this.progressVisible = true
-            console.log(res.data)
-        }
+  data () {
+    return {
+      // 查询对象
+      queryInfo: {
+        query: '',
+        pagenum: 1,
+        pagesize: 10
+      },
+      total: 0,
+      orderList: [],
+      // 地址修改对话框显示隐藏
+      addressVisible: false,
+      // 物流进度对话框显示隐藏
+      progressVisible: false,
+      // 地址表单
+      addressForm: {
+        address1: [],
+        address2: ''
+      },
+      addressFormRule: {
+        address1: [
+          { required: true, message: '请选择省市区县', trigger: 'blur' }
+        ],
+        address2: [
+          { required: true, message: '请输入详细地址', trigger: 'blur' }
+        ]
+      },
+      // 使用城市模块
+      cityData: cityData,
+      // 物流信息存储
+      progressInfo: []
     }
+  },
+  created () {
+    this.getOrderList()
+  },
+  methods: {
+    async getOrderList () {
+      const { data: res } = await this.$http.get('orders', { params: this.queryInfo })
+      if (res.meta.status !== 200) {
+        return this.$message.error('获取列表失败！')
+      }
+      this.total = res.data.total
+      this.orderList = res.data.goods
+      console.log(res.data)
+    },
+    // 分页显示条数改变时触发函数
+    handleSizeChange (newSize) {
+      this.queryInfo.pagesize = newSize
+      this.getOrderList()
+    },
+    // 页码值发生改变是时触发
+    handleCurrentChange (newPage) {
+      this.queryInfo.pagenum = newPage
+      this.getOrderList()
+    },
+    // 展示修改地址的对话框
+    showBox () {
+      this.addressVisible = true
+    },
+    // 清空表单项
+    addressDialogClosed () {
+      // 关闭时清空Form
+      this.$refs.addressFormRef.resetFields()
+    },
+    // 展示物流对话框
+    async showProgressBox () {
+      // 请求地址是 kuaidi/:id
+      // 804909574412544580快单号是测试使用的
+      const { data: res } = await this.$http.get('kuaidi/804909574412544580')
+      if (res.meta.status !== 200) {
+        return this.$message.error('物流信息获取失败！')
+      }
+      this.progressInfo = res.data
+      this.progressVisible = true
+      console.log(res.data)
+    }
+  }
 }
 </script>
 

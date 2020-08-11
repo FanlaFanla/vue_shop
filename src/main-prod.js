@@ -2,20 +2,27 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router.js'
 import TreeTable from 'vue-table-with-tree-grid'
-import './plugins/element.js'
+
+// 发布模式采用CDN加载elementUI
+// import './plugins/element.js'
+
 // 导入全局样式表
 import './assets/css/global.css'
 
 // 导入富文本编辑器
 import VueQuillEditor from 'vue-quill-editor'
+
+// 最后项目优化时删除内部引用，采用CDN形式
 // 导入富文本编辑器对应的样式
-import 'quill/dist/quill.core.css' // import styles
-import 'quill/dist/quill.snow.css' // for snow theme
-import 'quill/dist/quill.bubble.css' // for bubble theme
+// import 'quill/dist/quill.core.css' // import styles
+// import 'quill/dist/quill.snow.css' // for snow theme
+// import 'quill/dist/quill.bubble.css' // for bubble theme
 
 // 导入页面加载进度条nprogress对应的js和css
 import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
+
+// 最后项目优化时删除内部引用，采用CDN形式
+// import 'nprogress/nprogress.css'
 
 // 导入axios
 import axios from 'axios'
@@ -44,7 +51,7 @@ Vue.component('tree-table', TreeTable)
 Vue.use(VueQuillEditor)
 
 // 日期格式化函数组件
-Vue.filter('dateFormat', function(originVal) {
+Vue.filter('dateFormat', function (originVal) {
     const dt = new Date(originVal)
     const y = dt.getFullYear()
     const m = (dt.getMonth() + 1 + '').padStart(2, '0')
